@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\QuanLy;
 use Validator;
+use Illuminate\Support\Facedes\Auth;
 
 
 class QuanLyController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth',['except' => 'getLogout']);
+    }
 
     public function index()
     {

@@ -17,5 +17,6 @@ Route::get('/', function () {
 Route::resource('quanlynhansu', 'QuanLyController');
 Route::post('quanlynhansu/update', 'QuanLyController@update')->name('quanlynhansu.update');
 Route::get('quanlynhansu/destroy/{id}', 'QuanLyController@destroy');
-Route::get('dangnhap','LoginController@getLogin')->name('dangnhap');
+Route::get('dangnhap','LoginController@getLogin')->name('login');
 Route::post('dangnhap','LoginController@postLogin');
+Route::get('dangxuat','LogoutController@getLogout');

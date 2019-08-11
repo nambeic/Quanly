@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Login</title>
+	<title>Đăng nhập</title>
 	<!-- Latest compiled and minified CSS & JS -->
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<form action="#" method="POST" role="form">
-					<legend>Login</legend>
+					<legend>Đăng nhập</legend>
 					
 						<div class="alert alert-danger error errorLogin" style="display: none;">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
