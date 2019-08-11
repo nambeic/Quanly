@@ -15,7 +15,6 @@ class CreateQuanLiesTable extends Migration
     {
         Schema::create('quan_lies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('anh');
             $table->string('hoTen');
             $table->string('diaChi');
             $table->integer('tuoi');

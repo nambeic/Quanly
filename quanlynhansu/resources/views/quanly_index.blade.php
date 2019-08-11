@@ -23,9 +23,9 @@
     <table class="table table-bordered table-striped" id="user_table" style="text-align: center;">
            <thead>
             <tr>
-                <th width="15%" style="text-align: center;">Ảnh Đại Diện</th>
                 <th width="20%" style="text-align: center;">Họ Tên</th>
                 <th width="25%" style="text-align: center;">Địa Chỉ</th>
+                <th width="15%" style="text-align: center;">Tuổi</th>
                 <th width="25%" style="text-align: center;">SĐT</th>
                 <th width="15%" style="text-align: center;">Hành Động</th>
             </tr>
@@ -38,6 +38,7 @@
 
  </body>
 </html>
+
 <script>
 $(document).ready(function(){
 
@@ -50,20 +51,16 @@ $(document).ready(function(){
   },
   columns:[
    {
-    data: 'anh',
-    name: 'anh',
-    render: function(data, type, full, meta){
-     return "<img src={{ URL::to('/') }}/images/" + data + " width='70' class='img-thumbnail' />";
-    },
-    orderable: false
-   },
-   {
     data: 'hoTen',
     name: 'hoTen'
    },
    {
     data: 'diaChi',
     name: 'diaChi'
+   },
+   {
+    data: 'tuoi',
+    name: 'tuoiZ'
    },
    {
     data: 'sdt',
@@ -76,6 +73,14 @@ $(document).ready(function(){
    }
   ]
  });
+
+  
+
+
+
+ 
+
+
 
 });
 </script>

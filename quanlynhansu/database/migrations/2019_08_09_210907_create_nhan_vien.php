@@ -15,7 +15,6 @@ class CreateNhanVien extends Migration
     {
         Schema::create('nhan_vien', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('anh');
             $table->string('hoTen');
             $table->string('diaChi');
             $table->integer('tuoi');

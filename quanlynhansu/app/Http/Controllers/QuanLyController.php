@@ -49,7 +49,38 @@ class QuanLyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(        
+            'hoTen'    =>  'required',
+            'diaChi'     =>  'required',
+            'tuoi'     =>  'required',
+            'sdt'     =>  'required',
+        );
+
+        $mes = [
+            'hoTen.required' => 'Họ không được bỏ trống',
+            'diaChi.required' => 'Tên không được bỏ trống',
+            'tuoi.required' => 'Tuổi không được bỏ trống',
+            'sdt.required' => 'sdt không được bỏ trống',
+        ];
+
+        $error = Validator::make($request->all(), $rules, $mes);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(           
+            'hoTen'        =>  $request->hoTen,
+            'diaChi'         =>  $request->diaChi,
+            'tuoi'         =>  $request->tuoi,
+            'sdt'         =>  $request->sdt,
+
+        );
+
+        QuanLy::create($form_data);
+
+        return response()->json(['success' => 'Thêm thành công.']);
     }
 
     /**
