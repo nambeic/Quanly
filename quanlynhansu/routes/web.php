@@ -15,3 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('quanlynhansu', 'QuanLyController');
+Route::post('quanlynhansu/update', 'QuanLyController@update')->name('quanlynhansu.update');
+Route::get('quanlynhansu/destroy/{id}', 'QuanLyController@destroy');

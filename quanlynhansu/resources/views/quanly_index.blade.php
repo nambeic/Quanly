@@ -64,15 +64,13 @@
           <div class="form-group">
             <label class="control-label col-md-4">Tuổi : </label>
             <div class="col-md-8">
-              <input type="text" name="tuoi" id="tuoi" />
-              <span id="store_image"></span>
+              <input type="text" name="tuoi" id="tuoi" class="form-control" />
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-4">Số điện Thoại : </label>
             <div class="col-md-8">
-              <input type="text" name="sdt" id="sdt" />
-              <span id="store_image"></span>
+              <input type="text" name="sdt" id="sdt" class="form-control"/>
             </div>
           </div>
           <br />
@@ -121,7 +119,7 @@ $(document).ready(function(){
   ]
  });
 
-  $('#create_record').click(function(){
+ $('#create_record').click(function(){
   $('.modal-title').text("Thêm mới");
      $('#action_button').val("Thêm");
      $('#action').val("Add");
@@ -162,6 +160,59 @@ $(document).ready(function(){
     }
    })
   }
+
+  if($('#action').val() == "Edit")
+  {
+   $.ajax({
+    url:"{{ route('quanlynhansu.update') }}",
+    method:"POST",
+    data:new FormData(this),
+    contentType: false,
+    cache: false,
+    processData: false,
+    dataType:"json",
+    success:function(data)
+    {
+     var html = '';
+     if(data.errors)
+     {
+      html = '<div class="alert alert-danger">';
+      for(var count = 0; count < data.errors.length; count++)
+      {
+       html += '<p>' + data.errors[count] + '</p>';
+      }
+      html += '</div>';
+     }
+     if(data.success)
+     {
+      html = '<div class="alert alert-success">' + data.success + '</div>';
+      $('#sample_form')[0].reset();
+      $('#user_table').DataTable().ajax.reload();
+     }
+     $('#form_result').html(html);
+    }
+   });
+  }
+ });
+
+ $(document).on('click', '.edit', function(){
+  var id = $(this).attr('id');
+  $('#form_result').html('');
+  $.ajax({
+   url:"/quanlynhansu/"+id+"/edit",
+   dataType:"json",
+   success:function(html){
+    $('#hoTen').val(html.data.hoTen);
+    $('#diaChi').val(html.data.diaChi);
+    $('#tuoi').val(html.data.tuoi);
+    $('#sdt').val(html.data.sdt);
+    $('#hidden_id').val(html.data.id);
+    $('.modal-title').text("Chỉnh sửa");
+    $('#action_button').val("Sửa");
+    $('#action').val("Edit");
+    $('#formModal').modal('show');
+   }
+  })
  });
 });
 </script>
