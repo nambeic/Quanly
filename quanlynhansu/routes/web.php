@@ -12,8 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dangnhap');
 });
 Route::resource('quanlynhansu', 'QuanLyController');
 Route::post('quanlynhansu/update', 'QuanLyController@update')->name('quanlynhansu.update');
 Route::get('quanlynhansu/destroy/{id}', 'QuanLyController@destroy');
+Route::get('dangnhap','LoginController@getLogin')->name('dangnhap');
+Route::post('dangnhap','LoginController@postLogin');

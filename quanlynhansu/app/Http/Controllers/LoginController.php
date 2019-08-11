@@ -11,7 +11,7 @@ use Illuminate\Support\MessageBag;
 class LoginController extends Controller
 {
     public function getLogin() {
-    	return view('login');
+    	return view('dangnhap');
     }
     public function postLogin(Request $request) {
     	$rules = [
