@@ -11,8 +11,28 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
  </head>
  <body>
-  <div class="container">    
-     <h1 align="center">Quản Lý Nhân Viên</h1>
+      <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" >Quản Lý Nhân Viên</a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{url('getlogout')}}">Đăng xuất</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
+
+  <div class="container">
      <div align="right">
       <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Thêm mới</button>
      </div>
