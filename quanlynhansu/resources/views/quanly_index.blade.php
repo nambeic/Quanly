@@ -82,6 +82,23 @@
     </div>
   </div>
 </div>
+<div id="confirmModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Xác nhận</h2>
+      </div>
+      <div class="modal-body">
+        <h4 align="center" style="margin:0;">Bạn chắc chắn muốn xóa chứ?</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">Đồng ý</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 $(document).ready(function(){
 
@@ -212,5 +229,29 @@ $(document).ready(function(){
    }
   })
  });
+
+  var user_id;
+
+ $(document).on('click', '.delete', function(){
+  user_id = $(this).attr('id');
+  $('#confirmModal').modal('show');
+ });
+
+ $('#ok_button').click(function(){
+  $.ajax({
+   url:"quanlynhansu/destroy/"+user_id,
+   beforeSend:function(){
+    $('#ok_button').text('Deleting...');
+   },
+   success:function(data)
+   {
+    setTimeout(function(){
+     $('#confirmModal').modal('hide');
+     $('#user_table').DataTable().ajax.reload();
+    }, 200);
+   }
+  })
+ });
+
 });
 </script>
