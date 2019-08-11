@@ -112,6 +112,7 @@ class QuanLyController extends Controller
 
     public function destroy($id)
     {
-
+        $data = QuanLy::findOrFail($id);
+        $data->delete();
     }
 }
