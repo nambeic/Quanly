@@ -151,7 +151,7 @@ $(document).ready(function(){
   ]
  });
 
- $('#create_record').click(function(){
+$('#create_record').click(function(){
   $('.modal-title').text("Thêm mới");
      $('#action_button').val("Thêm");
      $('#action').val("Add");
