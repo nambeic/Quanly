@@ -31,31 +31,8 @@ class QuanLy extends Model
         }
         return view('DanhSach');
     }
-    public static function store(Request $request)
+    public static function store($request)
     {
-        $rules = array(        
-            'hoTen'    =>  'required',
-            'diaChi'     =>  'required',
-            'tuoi'     =>  'required|numeric',
-            'sdt'     =>  'required|numeric',
-        );
-
-        $mes = [
-            'hoTen.required' => 'Họ không được bỏ trống',
-            'diaChi.required' => 'Tên không được bỏ trống',
-            'tuoi.required' => 'Tuổi không được bỏ trống',
-            'sdt.required' => 'Số điện thoại không được bỏ trống',
-            'sdt.numeric' => 'Số điện thoại phải là số',
-            'tuoi.numeric' => 'Tuổi phải là số',
-        ];
-
-        $error = Validator::make($request->all(), $rules, $mes);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
         $form_data = array(           
             'hoTen'        =>  $request->hoTen,
             'diaChi'         =>  $request->diaChi,
@@ -63,10 +40,7 @@ class QuanLy extends Model
             'sdt'         =>  $request->sdt,
 
         );
-
         QuanLy::create($form_data);
-
-        return response()->json(['success' => 'Thêm thành công.']);
     }
 
     public static function edit($id)
@@ -78,31 +52,8 @@ class QuanLy extends Model
         }
     }
 
-    public static function update1(Request $request)
+    public static function update1($request)
     {
-        $rules = array(
-            'hoTen'    =>  'required',
-            'diaChi'     =>  'required',
-            'tuoi'     =>  'required|numeric',
-            'sdt'     =>  'required|numeric',
-        );
-
-        $mes = [
-            'hoTen.required' => 'Họ không được bỏ trống',
-            'diaChi.required' => 'Tên không được bỏ trống',
-            'tuoi.required' => 'Tuổi không được bỏ trống',
-            'sdt.required' => 'Số điện thoại không được bỏ trống',
-            'sdt.numeric' => 'Số điện thoại phải là số',
-            'tuoi.numeric' => 'Tuổi phải là số',
-        ]; 
-
-        $error = Validator::make($request->all(), $rules, $mes);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
         $form_data = array(
             'hoTen'        =>  $request->hoTen,
             'diaChi'         =>  $request->diaChi,
@@ -110,8 +61,6 @@ class QuanLy extends Model
             'sdt'         =>  $request->sdt,
         );
         QuanLy::whereId($request->hidden_id)->update($form_data);
-
-        return response()->json(['success' => 'Chỉnh sửa thành công']);
     }
 
     public static function destroy($id)

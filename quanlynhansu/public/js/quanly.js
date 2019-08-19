@@ -32,6 +32,7 @@ $(document).ready(function() {
     $('#action').val("Add");
     $('#sample_form')[0].reset();
     $('#AddModal').modal('show');
+    $('#form_result').hide();
   });
 
   $('#sample_form').on('submit', function(event) {
@@ -39,6 +40,7 @@ $(document).ready(function() {
     event.preventDefault();
     var id = $(this).attr('id');
     if ($('#action').val() == 'Add') {
+      $('#form_result').show();
       $.ajax({
         url: "danhsach/",
         method: "POST",
@@ -49,23 +51,25 @@ $(document).ready(function() {
         dataType: "json",
         success: function(data) {
           var html = '';
-          if (data.errors) {
-            html = '<div class="alert alert-danger">';
-            for (var count = 0; count < data.errors.length; count++) {
-              html += '<p>' + data.errors[count] + '</p>';
-            }
-            html += '</div>';
-          }
-          if (data.success) {
             html = '<div class="alert alert-success">' + data.success + '</div>';
             $('#sample_form')[0].reset();
             setTimeout(function() {
               $('#AddModal').modal('hide');
-              $('#user_table0').DataTable().ajax.reload();
+              $('#form_result').hide();
+              $('#user_table').DataTable().ajax.reload();
             }, 1000);
-          }
           $('#form_result').html(html);
+        },
+        error: function(error) {
+          var err = error.responseJSON.errors;
+          html = '<div class="alert alert-danger">';
+            for (var i in err) {
+              html += '<p>' + err[i] + '</p>';
+            }
+            html += '</div>';
+            $('#form_result').html(html);
         }
+        
       })
     }
 
@@ -83,23 +87,45 @@ $(document).ready(function() {
         cache: false,
         processData: false,
         dataType: "json",
+        // success: function(data) {
+        //   var html = '';
+        //     html = '<div class="alert alert-success">' + data.success + '</div>';
+        //     $('#sample_form')[0].reset();
+        //     setTimeout(function() {
+        //       $('#AddModal').modal('hide');
+        //       $('#form_result').hide();
+        //       $('#user_table').DataTable().ajax.reload();
+        //     }, 1000);
+        //   $('#form_result').html(html);
+        // },
+        // error: function(error) {
+        //   var err = error.responseJSON.errors;
+        //   html = '<div class="alert alert-danger">';
+        //     for (var i in err) {
+        //       html += '<p>' + err[i] + '</p>';
+        //     }
+        //     html += '</div>';
+        //     $('#form_result').html(html);
+        // }
         success: function(data) {
           var html = '';
-          if (data.errors) {
-            html = '<div class="alert alert-danger">';
-            for (var count = 0; count < data.errors.length; count++) {
-              html += '<p>' + data.errors[count] + '</p>';
-            }
-            html += '</div>';
-          }
-          if (data.success) {
             html = '<div class="alert alert-success">' + data.success + '</div>';
+            $('#sample_form')[0].reset();
             setTimeout(function() {
               $('#AddModal').modal('hide');
-              $('#user_table0').DataTable().ajax.reload();
+              $('#form_result').hide();
+              $('#user_table').DataTable().ajax.reload();
             }, 1000);
-          }
           $('#form_result').html(html);
+        },
+        error: function(error) {
+          var err = error.responseJSON.errors;
+          html = '<div class="alert alert-danger">';
+            for (var i in err) {
+              html += '<p>' + err[i] + '</p>';
+            }
+            html += '</div>';
+            $('#form_result').html(html);
         }
       });
     }

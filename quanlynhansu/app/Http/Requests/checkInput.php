@@ -30,4 +30,16 @@ class checkInput extends FormRequest
             'sdt'     =>  'required|numeric',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'hoTen.required' => 'Họ không được bỏ trống',
+            'diaChi.required' => 'Tên không được bỏ trống',
+            'tuoi.required' => 'Tuổi không được bỏ trống',
+            'sdt.required' => 'Số điện thoại không được bỏ trống',
+            'sdt.numeric' => 'Số điện thoại phải là số',
+            'tuoi.numeric' => 'Tuổi phải là số',
+        ];
+    }
 }

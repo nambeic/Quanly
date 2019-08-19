@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\checkInput;
 use Illuminate\Http\Request;
 use App\QuanLy;
 use Validator;
@@ -21,17 +21,19 @@ class QuanLyController extends Controller
     {
         return QuanLy::show();
     }
-    public function store(Request $request)
+    public function store(checkInput $request)
     {
-        return QuanLy::store($request);
+        QuanLy::store($request);
+        return response()->json(['success' => 'Thêm thành công.']);
     }
     public function edit($id)
     {
         return QuanLy::edit($id);
     }
-    public function update(Request $request)
+    public function update(checkInput $request)
     {
-        return QuanLy::update1($request);
+        QuanLy::update1($request);
+        return response()->json(['success' => 'Chỉnh sửa thành công']);
     }
     public function destroy($id)
     {
