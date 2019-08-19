@@ -51,7 +51,6 @@
     </div>
   </body>
   @include ('AddModal')
-  @include ('EditModal')
   @include ('DeleteModal')
   <script src="{{url('js/quanly.js')}}"></script>
 </html>

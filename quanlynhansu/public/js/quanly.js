@@ -30,14 +30,17 @@ $(document).ready(function() {
     $('.modal-title').text("Thêm mới");
     $('#action_button').val("Thêm");
     $('#action').val("Add");
+    $('#sample_form')[0].reset();
     $('#AddModal').modal('show');
   });
 
   $('#sample_form').on('submit', function(event) {
+
     event.preventDefault();
+    var id = $(this).attr('id');
     if ($('#action').val() == 'Add') {
       $.ajax({
-        url: $('#sample_form').attr('action'),
+        url: "danhsach/",
         method: "POST",
         data: new FormData(this),
         contentType: false,
@@ -66,11 +69,17 @@ $(document).ready(function() {
       })
     }
 
-    if ($('#action').val() == "Edit") {
+    if ($('#action').val() == "Edit") { 
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
       $.ajax({
-        url: $('#sample_form').attr('action'),
-        data: new FormData(this),
-        contentType: false,
+        url: "danhsach/"+id,
+        method:"PUT",
+        data:  $('#sample_form').serialize(),
+        // contentType: false,
         cache: false,
         processData: false,
         dataType: "json",
@@ -85,8 +94,10 @@ $(document).ready(function() {
           }
           if (data.success) {
             html = '<div class="alert alert-success">' + data.success + '</div>';
-            $('#sample_form')[0].reset();
-            $('#user_table').DataTable().ajax.reload();
+            setTimeout(function() {
+              $('#AddModal').modal('hide');
+              $('#user_table0').DataTable().ajax.reload();
+            }, 1000);
           }
           $('#form_result').html(html);
         }
@@ -115,10 +126,10 @@ $(document).ready(function() {
   });
 
   var user_id;
-
   $(document).on('click', '.delete', function() {
     user_id = $(this).attr('id');
     $('#confirmModal').modal('show');
+    $('#ok_button').text('Đồng Ý');
   });
 
   $('#ok_button').click(function() {
@@ -128,7 +139,7 @@ $(document).ready(function() {
       }
   });
     $.ajax({
-      url: "danhsach/destroy/" + user_id,
+      url: "danhsach/" + user_id,
       method: "DELETE",
       beforeSend: function() {
         $('#ok_button').text('Deleting...');

@@ -17,6 +17,10 @@ class QuanLyController extends Controller
     {
         return QuanLy::index();
     }
+    public function show()
+    {
+        return QuanLy::show();
+    }
     public function store(Request $request)
     {
         return QuanLy::store($request);

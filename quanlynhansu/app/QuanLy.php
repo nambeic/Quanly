@@ -119,4 +119,8 @@ class QuanLy extends Model
         $data = QuanLy::findOrFail($id);
         $data->delete();
     }
+    public static function show()
+    {
+       
+    }
 }
